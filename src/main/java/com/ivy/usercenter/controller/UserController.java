@@ -28,6 +28,8 @@ import static com.ivy.usercenter.contant.UserConstant.USER_LOGIN_STATE;
  */
 @RestController
 @RequestMapping("/user")
+@CrossOrigin(origins = {"http://user.mya-ivy.cn"},allowCredentials = "true")
+
 public class UserController {
 
     @Resource
@@ -38,10 +40,10 @@ public class UserController {
         if (userRegisterRequest == null) {
             throw new BusinessException(ErrorCode.PARAMS_ERROR);
         }
-        String userAccount = userRegisterRequest.getUserAccount();
         String userPassword = userRegisterRequest.getUserPassword();
         String checkPassword = userRegisterRequest.getCheckPassword();
         String planetCode = userRegisterRequest.getPlanetCode();
+        String userAccount = userRegisterRequest.getUserAccount();
 
         if (StringUtils.isAnyBlank(userAccount, userPassword, checkPassword, planetCode)) {
             // 这里应该是抛异常
